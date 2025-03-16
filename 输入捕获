@@ -1,1 +1,8 @@
-
+uint32_t fre ,capture;
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+{
+	if(htim3->Instance == TIM3)
+	{
+		capture = HAL_TIM_ReadCapturedValue(&htim3,TIM_CHANNEL_2) + 1;
+	fre = 1000000 / capture;
+	}		
