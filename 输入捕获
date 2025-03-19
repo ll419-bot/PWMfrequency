@@ -1,8 +1,18 @@
-uint32_t fre ,capture;
-void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+0.定义变量 获取捕获的值   ————捕获频率 只需要开一个通道
+
+1. 开启定时器中断：
+HAL_TIM_IC_Start_IT(&htim2,TIM_CHANNEL_1);
+ HAL_TIM_IC_Start_IT(&htim3,TIM_CHANNEL_1);
+
+2.中断回调函数
+ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
-	if(htim3->Instance == TIM3)
-	{
-		capture = HAL_TIM_ReadCapturedValue(&htim3,TIM_CHANNEL_2) + 1;
-	fre = 1000000 / capture;
-	}		
+if(htim->Instance == TIM2)  //先判断定时器
+{
+cap1 = HAL_TIM_ReadCapturedValue(&htim3,TIM_CHANNEL_1);   //获取捕获寄存器的值
+        TIM2->CNT = 0;
+		 R40_frq = 80000000/80/cap1;   //这个cap1就是ccr
+		 HAL_TIM_IC_Start_IT(&htim2,TIM_CHANNEL_1);       //计算之后 还要再开启一次中断 让下一次也可以进来
+}
+
+捕获占空比 需要两个通道
