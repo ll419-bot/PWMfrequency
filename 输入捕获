@@ -16,3 +16,16 @@ cap1 = HAL_TIM_ReadCapturedValue(&htim3,TIM_CHANNEL_1);   //获取捕获寄存�
 }
 
 捕获占空比 需要两个通道
+0.定义变量 捕获下降沿     uint32_t cap1_2, cap2_2, duty1, duty2 ;
+1.在之前的代码里面加上：
+HAL_TIM_IC_Start_IT(&htim2,TIM_CHANNEL_2);
+ HAL_TIM_IC_Start_IT(&htim3,TIM_CHANNEL_2);
+
+if(htim->Channel==HAL_TIM_ACTIVE_CHANNEL_1)     //因为有两个通道 使用不仅要判断定时器 还要判断通道
+		
+
+
+
+
+
+
